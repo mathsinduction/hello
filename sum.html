@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<link rel="icon" href="img/fav1.jpg">
+
+<title>Мат. Индукция</title>
+
+<style>
+body{
+  background:#BBD3D3; /* Меняется фон экрана, выбирается здесь */
+}
+
+#wrapper{ /* Оболочка страницы сайта */
+  width: 1200px; /* Меняется ширина страницы */
+  margin: 0 auto;
+  background:#0d2736;
+  box-shadow: 0px 50px 100px 0px rgba(0, 0, 0, 0.5)
+    font-size: 24px; /* Меняется задний фон страницы */
+}
+
+/* Шапка сайта */
+
+#header{
+
+  width: 100%;
+  height: 250px;
+ /* Задаём блоку относительное позиционирование для того, чтобы затем размещать, в нём другие элементы и позиционировать относительно его границ поверх фоновой картинки и заголовка */
+  height: 250px; /* Высота шапки */
+  background-color: #ffffff; /* Фон шапки */
+   margin-bottom: 5px;
+   margin-top: -10px;/* Нижний отступ шапки от остального контента */
+  border-radius: 5px; /* Закругляются углы блока */
+ box-shadow: 0px 50px 100px 0px rgba(0, 0, 0, 0.5) /* Тень. Визуально приподнимает блок над оболочкой */
+}
+img{ /* Фоновая картинка в шапке */
+width: 100%;
+height: 100%;
+top: 0%; /* Разрешаем наплывание других элементов на картинку */
+  margin: 0 0 0 0;} /* Размещаем картинку в блоке header. 1-я и 3-я цифры - двигаем вверх-вниз, 2-я и 4-я цифры - двигаем вправо-влево */
+.q{ /* Заголовок сайта */
+  text-align: center;
+vertical-align: middle;
+position: relative;
+float: left;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -0%);
+clear: both;
+margin:0 80px 0 0; /* Заголовок двигается верх-вправо-вниз-влево. */
+  color:#000000;
+  position: relative;
+top: -150px;
+/*right: -23%;*/
+width: 100%;
+font-size: 38px;
+height: 40px;
+/*background:#FFFFFF;
+box-shadow: 30px;*/
+  padding: 1px;
+  text-shadow:
+		-0   -4px 6px #25E7F5,
+		 0   -4px 6px #25E7F5,
+		-0    4px 6px #25E7F5,
+		 0    4px 6px #25E7F5,
+		-4px -0   6px #25E7F5,
+		 4px -0   6px #25E7F5,
+		-4px  0   6px #25E7F5,
+		 4px  0   6px #25E7F5,
+		-1px -4px 6px #25E7F5,
+		 1px -4px 6px #25E7F5,
+		-1px  4px 6px #25E7F5,
+		 1px  4px 6px #25E7F5,
+		-4px -1px 6px #25E7F5,
+		 4px -1px 6px #25E7F5,
+		-4px  1px 6px #25E7F5,
+		 4px  1px 6px #25E7F5,
+		-2px -4px 6px #25E7F5,
+		 2px -4px 6px #25E7F5,
+		-2px  4px 6px #25E7F5,
+		 2px  4px 6px #25E7F5,
+		-4px -2px 6px #25E7F5,
+		 4px -2px 6px #25E7F5,
+		-4px  2px 6px #25E7F5,
+		 4px  2px 6px #25E7F5,
+		-3px -4px 6px #25E7F5,
+		 3px -4px 6px #25E7F5,
+		-3px  4px 6px #25E7F5,
+		 3px  4px 6px #25E7F5,
+		-4px -3px 6px #25E7F5,
+		 4px -3px 6px #25E7F5,
+		-4px  3px 6px #25E7F5,
+		 4px  3px 6px #25E7F5,
+		-4px -4px 6px #25E7F5,
+		 4px -4px 6px #25E7F5,
+		-4px  4px 6px #25E7F5,
+		 4px  4px 6px #25E7F5,
+		-4px -4px 6px #25E7F5,
+		 4px -4px 6px #25E7F5,
+		-4px  4px 6px #25E7F5,
+		 4px  4px 6px #25E7F5;
+ /* Цвет заголовка */
+}
+
+/* Сайдбар (колонка справа) */
+
+#sidebar1{ /* Блок сайдбара */
+  background-color: #ffffff;
+  position: relative;
+  /*top: 20px; /* Фон блока */
+  width: 20%; /* Ширина блока */
+  padding: 10px; /* Отступ текста от краёв */
+  float: right; /* Размещаем блок справа от других элементов, наплывание или обтекание справа). Если делать сайдбар слева, то значение right меняем на left */
+  border-radius: 15px; /* Закругляем углы блока */
+  box-shadow: 30px;
+  font-size: 23px;
+  text-align: right;
+    margin: auto 0;
+    left: 0px;
+    top: -40px;
+    bottom: 5px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5) /* Задаём блоку тень */
+  /*margin-bottom:5px;*/
+}
+.marcer{ /* Галочки маркеры меню */
+  float: left; /* Размещаем слева от текста */
+  margin: 5px 5px 0 0; /* Двигаются вверх-вправо-вниз-влево */
+}
+
+/* Контент (статья) */
+
+#content{ /* Блок контента */
+  margin-bottom: 5px; /* Отступ блока статьи от блока подвала */
+  width: 76%; /* Ширина статьи */
+  padding: 10px; /* Отступ текста от краёв блока */
+  background: #ffffff; /* Фон статьи */
+  border-radius: 15px;
+  font-size: 23px;
+  box-shadow: 5px 5px 50px 10px rgba(0, 0, 0, 0.5)
+}
+.left{ /* Картинка в тексте слева */
+  float: left;
+  margin: 30px 7px 7px 7px;
+}
+.right{ /* Картинка в тексте справа */
+  float: right;
+  margin: 7px 0 7px 7px;
+}
+.ts {
+	font-family: Times;
+	/*font-size: 30px;*/
+	color: #000000;
+	text-shadow:
+		-0   -1px 1px #d4f1fa,
+		 0   -1px 1px #d4f1fa,
+		-0    1px 1px #d4f1fa,
+		 0    1px 1px #d4f1fa,
+		-1px -0   1px #d4f1fa,
+		 1px -0   1px #d4f1fa,
+		-1px  0   1px #d4f1fa,
+		 1px  0   1px #d4f1fa,
+		-1px -1px 1px #d4f1fa,
+		 1px -1px 1px #d4f1fa,
+		-1px  1px 1px #d4f1fa,
+		 1px  1px 1px #d4f1fa,
+		-1px -1px 1px #d4f1fa,
+		 1px -1px 1px #d4f1fa,
+		-1px  1px 1px #d4f1fa,
+		 1px  1px 1px #d4f1fa;
+}
+/* Подвал */
+
+#footer{ /* Блок подвала */
+  height:80px; /* Высота блока подвала */
+  background-color: #dedede; /* Фон блока подвала */
+  margin-bottom: 10px; /* Отступ снизу */
+  border-radius: 5px; /* Закруглённые углы */
+  box-shadow: rgba(0,0,0,10) 0px 1px 3px;
+  font-size: 19px; /* Тень блока */
+}
+.clear{ /* Запрет наплывания. Устанавливается для того, чтобы блок контента, при заполнении текстом и изображениями не наплывал на подвал */
+  clear: both;
+}
+  .fon{ /* Номер телефона */
+  float:left; /* Разрешаем другим элементам обтекать абзац справа */
+  margin:20px 0 0 20px;
+}
+.fax{ /* Номер факса */
+  float:left;
+  margin:20px 0 0 60px;
+}
+.mail{ /* Адрес E-mail */
+  float:left;
+ margin:20px 0 0 60px;
+}
+</style>
+</head>
+<body>
+  <div id="wrapper">
+ <!--Оболочка страницы-->
+<!--Шапка сайта-->
+    <div id="header">
+<!--Заголовок сайта-->
+      <img src="img/шапка22.jpg">
+      <p class="q" align="center"><i><span style="font-family:Impact, sans-serif;">Метод математической индукции и его применение</span></i></p>
+<!--Фоновая картинка в шапке сайта-->
+    </div>
+<!--Сайдбар-->
+    <div id="sidebar1">
+<!--меню-->
+      <h3 align="center">На нашем сайте</h3>
+<!--Картинки маркеров меню (галочки)-->
+<hr width="100%" color="#c0c0c0" size="1">
+
+<a href="qwerty.html" style="color:#000000; text-decoration:none"> Основы метода математической индукции</a>
+<hr width="100%" color="#c0c0c0" size="1">
+
+<a href="krat.html" style="color:#000000; text-decoration:none"> Доказательство кратности и делимости</a>
+<hr width="100%" color="#c0c0c0" size="1">
+
+<a href="ravn.html" style="color:#000000; text-decoration:none"> Доказательство равенств</a>
+<hr width="100%" color="#c0c0c0" size="1">
+
+<a href="neravn.html" style="color:#000000; text-decoration:none"> Доказательство неравенств</a>
+<hr width="100%" color="#c0c0c0" size="1">
+
+<a href="sum.html" style="color:#000000; text-decoration:none"> Вычисление сумм</a>
+<hr width="100%" color="#c0c0c0" size="1">
+
+<a href="gallery.html" style="color:#000000; text-decoration:none"> Галерея</a>
+<!--Прямая синяя линия-->
+          <hr width="100%" color="#c0c0c0" size="1">
+<!--Общая информация в сайдбаре-->
+      <h3></h3>
+      <div style="float:left; padding-top:0px;"><a target="_blank" href="http://tegdiw.ru/joke/"><img src="http://tegdiw.ru/informer/joke/4/funny.png" alt="" border="0"></a>
+    </div>
+    </div>
+<!--Основной контент (статья)-->
+
+    <div id="content">
+<!--Заголовок статьи-->
+        <h3>Вычисление сумм</h3>
+<!--Текст статьи-->
+<p align="justify">На странице представлен пример решения задачи на соответствующую тему с помощью метода мат. индукции, а так же задачи для самопроверки.</p>
+<p>Во всех задачах считать n натуральным числом!</p>
+
+  <p>
+   <strong>Пример.</strong>Доказать, что 1+3+5+&hellip;+(2n-1)=n<sup>2</sup>, n - натуральное число.
+  </p>
+   <details>
+  <summary><b>
+   Решение:</b></summary> 1) Имеем n=1=1<sup>2</sup>. Следовательно, утверждение верно при n=1, т.е. А(1) истинно.
+
+
+  <p>
+   2) Докажем, что А(k)&#61662; A(k+1).
+  </p>
+
+  <p>
+   Пусть k-любое натуральное число и пусть утверждение справедливо для n=k, т.е.1+3+5+&hellip;+(2k-1)=k<sup>2</sup>.
+  </p>
+
+  <p>
+   Докажем, что тогда утверждение справедливо и для следующего натурального числа n=k+1, т.е. что
+  </p>
+
+  <p>
+   1+3+5+&hellip;+(2k+1)=(k+1)<sup>2</sup>.
+  </p>
+
+  <p>
+   В самом деле,1+3+5+&hellip;+(2k-1)+(2k+1)=k<sup>2</sup>+2k+1=(k+1)<sup>2</sup>.
+  </p>
+
+  <p>
+   Итак, А(k)&#61662; А(k+1). На основании принципа математической индукции заключаем, что предположение А(n) истинно для любого n.
+  </p>
+</details>
+
+<p><b>Задача 1.</b> Вычислите сумму 1⋅1!+2⋅2!+...+2012⋅2012!+2013⋅2013!.</p>
+<p><b>Задача 2.</b>Угадать формулу для суммы и доказать её.
+A<sub>n</sub>=2*<sup>1</sup>+3*2<sup>2</sup>+...+(n+1)n<sup>2</sup>
+<p><b>Задача 3.</b>Вычислить сумму 1—2 + 3—4 +…(—1)<sup>n-1</sup>n
+
+
+    </div>
+<!--Запрет наплывания-->
+  <div class="clear"></div>
+<!--Подвал-->
+    <div id="footer">
+      <p class="fon"><u><i>Телефон / Whatsapp:</i></u><br><a href="tel:+79638993607"  style="color:#000000; text-decoration:none"> +7 963 899 36 07 </p>
+      <p class="fax"><u><i>Telegram:</i></u><br><a href="https://t.me/windyday33"  style="color:#000000; text-decoration:none">@windyday33</a></p>
+      <p class="mail"><u><i>E-mail:</i></u><br><a href="mailto:fat.cat.ate.rat@outlook.com"  style="color:#000000; text-decoration:none">fat.cat.ate.rat@outlook.com</a></p>
+    </div>
+  </div>
+  <p align=center>© Perestoronina Arina V., 2022</p>
+</body>
+</html>
